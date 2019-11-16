@@ -1,7 +1,15 @@
 const BubbleSort = require('./algorithms/BubbleSort');
+const InsertionSort = require('./algorithms/InsertionSort');
+const SelectionSort = require('./algorithms/SelectionSort');
 const ArrayState = require('./ArrayState');
 const firebase = require('firebase');
 require('firebase/database');
+
+const algorithms = {
+  1: 'BubbleSort',
+  2: 'SelectionSort',
+  3: 'InsertionSort',
+};
 
 class Game {
   constructor(player1, player2) {
@@ -18,12 +26,19 @@ class Game {
     this.arr = arr;
 
     // generate algorithm
-    this.algorithm = 'BubbleSort';
+    const rnd = Math.floor(Math.random() * 3) + 1;
+    this.algorithm = algorithms[rnd];
 
     // generate states
     switch (this.algorithm) {
       case 'BubbleSort':
         this.states = BubbleSort.generateArrayStates(arr);
+        break;
+      case 'InsertionSort':
+        this.states = InsertionSort.generateArrayStates(arr);
+        break;
+      case 'SelectionSort':
+        this.states = SelectionSort.generateArrayStates(arr);
         break;
     }
 
