@@ -57,8 +57,10 @@ io.on('connection', socket => {
   });
 });
 
-http.listen(3000, () => {
-  console.log('Listening on port 3000.');
+const port = process.env.PORT || 3000;
+
+http.listen(port, '0.0.0.0', () => {
+  console.log(`Listening on port ${port}`);
   firebase.initializeApp({
     apiKey: 'AIzaSyBbujcUj47GXROPuxYDByZSCXE_VnZfJ3c',
     authDomain: 'beaglesort.firebaseapp.com',
