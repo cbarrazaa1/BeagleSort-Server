@@ -1,6 +1,7 @@
 const BubbleSort = require('./algorithms/BubbleSort');
 const InsertionSort = require('./algorithms/InsertionSort');
 const SelectionSort = require('./algorithms/SelectionSort');
+const QuickSort = require('./algorithms/QuickSort');
 const ArrayState = require('./ArrayState');
 const firebase = require('firebase');
 require('firebase/database');
@@ -9,6 +10,7 @@ const algorithms = {
   1: 'BubbleSort',
   2: 'SelectionSort',
   3: 'InsertionSort',
+  4: 'QuickSort',
 };
 
 class Game {
@@ -39,6 +41,9 @@ class Game {
         break;
       case 'SelectionSort':
         this.states = SelectionSort.generateArrayStates(arr);
+        break;
+      case 'QuickSort':
+        this.states = QuickSort.generateArrayStates(arr);
         break;
     }
 
