@@ -1,4 +1,4 @@
-module.exports = function compare(ascending, actual, comparedTo) {
+module.exports = function compare(actual, comparedTo, ascending) {
   if (ascending) {
     if (actual > comparedTo) {
       return true;
