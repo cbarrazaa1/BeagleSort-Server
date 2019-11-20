@@ -56,7 +56,7 @@ io.on('connection', socket => {
         game.hasEnded = true;
         firstPlayer.destroy();
         secondPlayer.destroy();
-      }, 10000);
+      }, 120000);
 
       games.push(game);
       return;
