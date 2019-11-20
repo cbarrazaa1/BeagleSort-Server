@@ -21,6 +21,7 @@ class Player {
 
   destroy() {
     this.socket.removeAllListeners('player_move');
+    this.socket.removeAllListeners('player_exit_early');
   }
 }
 
