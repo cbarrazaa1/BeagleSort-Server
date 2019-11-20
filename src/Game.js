@@ -28,7 +28,7 @@ class Game {
     this.arr = arr;
 
     // generate algorithm
-    const rnd = Math.floor(Math.random() * 3) + 1;
+    const rnd = Math.floor(Math.random() * 4) + 1;
     const rnd2 = Math.floor(Math.random() * 2);
     this.ascending = rnd2 === 0;
     this.algorithm = algorithms[rnd];
