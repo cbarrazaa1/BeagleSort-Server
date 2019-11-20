@@ -23,7 +23,12 @@ class Game {
     // generate array
     const arr = [];
     for (let i = 0; i < 7; i++) {
-      arr.push(Math.floor(Math.random() * 10));
+      let num = Math.floor(Math.random() * 100);
+
+      while (arr.some(n => n === num)) {
+        num = Math.floor(Math.random() * 100);
+      }
+      arr.push(num);
     }
     this.arr = arr;
 
