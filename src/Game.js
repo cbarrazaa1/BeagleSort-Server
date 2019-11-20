@@ -132,4 +132,61 @@ Game.prototype.playerMove = function(player, fromIndex, toIndex) {
   }
 };
 
+Game.prototype.playerExitEarly = function(player) {
+  // figure out which player it is
+  let otherPlayer = null;
+  if (player === this.player1) {
+    otherPlayer = this.player2;
+  } else {
+    otherPlayer = this.player1;
+  }
+
+  // tell other player it has ended
+  otherPlayer.socket.emit('game_ended', {won: true, autoWin: true});
+  this.hasEnded = true;
+
+  // update other player that won
+  const userRef = firebase.database().ref(`/users/${otherPlayer.id}`);
+  userRef.once('value', snapshot => {
+    const user = snapshot.val();
+
+    if (user != null) {
+      userRef.set({
+        username: otherPlayer.name,
+        won: user.won + 1,
+        lost: user.lost,
+      });
+    } else {
+      userRef.set({
+        username: otherPlayer.name,
+        won: 1,
+        lost: 0,
+      });
+    }
+  });
+
+  // update player that left
+  const lostUserRef = firebase.database().ref(`/users/${player.id}`);
+  lostUserRef.once('value', snapshot => {
+    const user = snapshot.val();
+
+    if (user != null) {
+      lostUserRef.set({
+        username: player.name,
+        won: user.won,
+        lost: user.lost + 1,
+      });
+    } else {
+      lostUserRef.set({
+        username: player.name,
+        won: 0,
+        lost: 1,
+      });
+    }
+  });
+
+  this.player1.destroy();
+  this.player2.destroy();
+};
+
 module.exports = Game;

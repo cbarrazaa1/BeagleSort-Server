@@ -13,6 +13,10 @@ class Player {
     this.socket.on('player_move', function(fromIndex, toIndex) {
       self.game.playerMove(self, fromIndex, toIndex);
     });
+
+    this.socket.on('player_exit_early', function() {
+      self.game.playerExitEarly(self);
+    });
   }
 
   destroy() {
