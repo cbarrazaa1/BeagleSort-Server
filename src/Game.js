@@ -55,7 +55,6 @@ class Game {
   }
 }
 
-var a = 0;
 Game.prototype.playerMove = function(player, fromIndex, toIndex) {
   // swap state
   const temp = player.arrState.arr[fromIndex];
