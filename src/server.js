@@ -49,6 +49,15 @@ io.on('connection', socket => {
         arr: game.arr,
       });
 
+      // set 2 mins maximum for game to end
+      setTimeout(() => {
+        firstPlayer.socket.emit('game_ended', {tie: true});
+        secondPlayer.socket.emit('game_ended', {tie: true});
+        game.hasEnded = true;
+        firstPlayer.destroy();
+        secondPlayer.destroy();
+      }, 10000);
+
       games.push(game);
       return;
     }
