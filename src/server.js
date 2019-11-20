@@ -39,11 +39,13 @@ io.on('connection', socket => {
       firstPlayer.socket.emit('entered_game', {
         otherPlayerName: secondPlayer.name,
         algorithm: game.algorithm,
+        ascending: game.ascending,
         arr: game.arr,
       });
       secondPlayer.socket.emit('entered_game', {
         otherPlayerName: firstPlayer.name,
         algorithm: game.algorithm,
+        ascending: game.ascending,
         arr: game.arr,
       });
 

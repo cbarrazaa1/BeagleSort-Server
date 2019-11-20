@@ -29,21 +29,23 @@ class Game {
 
     // generate algorithm
     const rnd = Math.floor(Math.random() * 3) + 1;
+    const rnd2 = Math.floor(Math.random() * 2);
+    this.ascending = rnd2 === 0;
     this.algorithm = algorithms[rnd];
 
     // generate states
     switch (this.algorithm) {
       case 'BubbleSort':
-        this.states = BubbleSort.generateArrayStates(arr);
+        this.states = BubbleSort.generateArrayStates(arr, this.ascending);
         break;
       case 'InsertionSort':
-        this.states = InsertionSort.generateArrayStates(arr);
+        this.states = InsertionSort.generateArrayStates(arr, this.ascending);
         break;
       case 'SelectionSort':
-        this.states = SelectionSort.generateArrayStates(arr);
+        this.states = SelectionSort.generateArrayStates(arr, this.ascending);
         break;
       case 'QuickSort':
-        this.states = QuickSort.generateArrayStates(arr);
+        this.states = QuickSort.generateArrayStates(arr, this.ascending);
         break;
     }
 

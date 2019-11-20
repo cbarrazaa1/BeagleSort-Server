@@ -1,6 +1,6 @@
 const ArrayState = require('../ArrayState');
 
-function generateArrayStates(origArr) {
+function generateArrayStates(origArr, ascending) {
   const arr = [...origArr];
   const n = origArr.length;
   const order = [0, 1, 2, 3, 4, 5, 6];
@@ -11,8 +11,14 @@ function generateArrayStates(origArr) {
     let minimum = i;
     let j = i + 1;
     while (j < n) {
-      if (arr[j] < arr[minimum]) {
-        minimum = j;
+      if (ascending) {
+        if (arr[j] < arr[minimum]) {
+          minimum = j;
+        }
+      } else {
+        if (arr[j] > arr[minimum]) {
+          minimum = j;
+        }
       }
       j++;
     }

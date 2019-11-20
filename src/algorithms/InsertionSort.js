@@ -1,6 +1,7 @@
 const ArrayState = require('../ArrayState');
+const cmp = require('./Compare');
 
-function generateArrayStates(origArr) {
+function generateArrayStates(origArr, ascending) {
   const arr = [...origArr];
   const n = origArr.length;
   const order = [0, 1, 2, 3, 4, 5, 6];
@@ -10,7 +11,7 @@ function generateArrayStates(origArr) {
   res.push(new ArrayState(order));
   while (curr < n) {
     let c = curr - 1;
-    while (c >= 0 && arr[c] > arr[c + 1]) {
+    while (c >= 0 && cmp(arr[c], arr[c + 1], ascending)) {
       const temp = arr[c + 1];
       arr[c + 1] = arr[c];
       arr[c] = temp;
