@@ -57,6 +57,15 @@ class Game {
     // set player states
     this.player1.arrState = new ArrayState([0, 1, 2, 3, 4, 5, 6]);
     this.player2.arrState = new ArrayState([0, 1, 2, 3, 4, 5, 6]);
+
+    // set 2 mins maximum for game to end
+    this.timer = setTimeout(() => {
+      this.player1.socket.emit('game_ended', {tie: true});
+      this.player2.socket.emit('game_ended', {tie: true});
+      this.hasEnded = true;
+      this.player1.destroy();
+      this.player2.destroy();
+    }, 120000);
   }
 }
 
@@ -133,6 +142,7 @@ Game.prototype.playerMove = function(player, fromIndex, toIndex) {
 
     this.player1.destroy();
     this.player2.destroy();
+    clearTimeout(this.timer);
   }
 };
 
@@ -191,6 +201,7 @@ Game.prototype.playerExitEarly = function(player) {
 
   this.player1.destroy();
   this.player2.destroy();
+  clearTimeout(this.timer);
 };
 
 module.exports = Game;
